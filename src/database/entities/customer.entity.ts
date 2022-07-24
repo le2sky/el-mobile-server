@@ -1,13 +1,6 @@
-import { Transform } from 'class-transformer';
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-} from 'class-validator';
+import { IsNumber } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { CommonUserEntity } from './userCommon.entity';
+import { CommonUserEntity } from './interface/common.user';
 
 @Entity('customer')
 export class CustomerEntity extends CommonUserEntity {
