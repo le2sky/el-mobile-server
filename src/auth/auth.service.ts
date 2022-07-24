@@ -11,12 +11,12 @@ export class AuthService {
   ) {}
 
   async jwtLogIn(data: LoginRequestDto) {
-    const { email, password } = data;
+    const { id, password } = data;
 
     //* 이메일 체크
-    const user = await this.userService.findOneBy({ email });
+    const user = await this.userService.findOneBy({ id });
     if (!user) {
-      throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.');
+      throw new UnauthorizedException('아이디와 비밀번호를 확인해주세요.');
     }
 
     //* password 체크
@@ -26,10 +26,16 @@ export class AuthService {
     );
 
     if (!isPasswordValidated) {
-      throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.');
+      throw new UnauthorizedException('아이디와 비밀번호를 확인해주세요.');
     }
 
-    const payload = { email: email, sub: user.user_id };
+    const payload = {
+      iss: 'server',
+      aud: 'client',
+      sub: user.customer_id,
+      name: user.name,
+    };
+
     return {
       token: this.jwtService.sign(payload),
     };

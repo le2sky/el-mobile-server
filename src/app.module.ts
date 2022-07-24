@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { HistoryModule } from './history/history.module';
 import { VideoModule } from './video/video.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -18,7 +17,6 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
     }),
     UserModule,
-    HistoryModule,
     VideoModule,
     AuthModule,
   ],
