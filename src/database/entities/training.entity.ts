@@ -1,19 +1,15 @@
 import { IsDateString, IsNotEmpty } from 'class-validator';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { CustomerEntity } from './customer.entity';
 import { TrainerEntity } from './trainer.entity';
 
 @Entity('training')
 export class TrainingEntity {
-  @PrimaryGeneratedColumn()
-  training_id: number;
+  @PrimaryColumn()
+  customer_id: number;
+
+  @PrimaryColumn()
+  trainer_id: number;
 
   @IsDateString()
   @IsNotEmpty()
@@ -30,6 +26,6 @@ export class TrainingEntity {
   customer: CustomerEntity;
 
   @ManyToOne(() => TrainerEntity, (trainer) => trainer.trainings)
-  @JoinColumn({ name: 'trainer_id', referencedColumnName: 'phone_number' })
+  @JoinColumn({ name: 'trainer_id', referencedColumnName: 'trainer_id' })
   trainer: TrainerEntity;
 }

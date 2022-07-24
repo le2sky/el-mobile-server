@@ -1,6 +1,15 @@
 import { IsNumber } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { CommonUserEntity } from './interface/common.user';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { CommonUserEntity } from './interface/commonUser.entity';
+import { MediaEntity } from './media.entity';
+import { TrainingEntity } from './training.entity';
 
 @Entity('customer')
 export class CustomerEntity extends CommonUserEntity {
@@ -14,4 +23,11 @@ export class CustomerEntity extends CommonUserEntity {
   @IsNumber()
   @Column({ type: 'float', nullable: true })
   weight?: number;
+
+  @OneToMany(() => TrainingEntity, (traning) => traning.customer)
+  trainings?: TrainingEntity[];
+
+  @OneToOne(() => MediaEntity)
+  @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
+  profile_image?: string;
 }

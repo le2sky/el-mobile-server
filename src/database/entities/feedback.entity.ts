@@ -1,23 +1,22 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { DateAuditEntity } from './interface/date.audit';
-import { TrainingEntity } from './training.entity';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { HistoryEntity } from './history.entity';
+import { DateAuditEntity } from './interface/dateAudit.entity';
 
 @Entity('feedback')
 export class FeedBackEntity extends DateAuditEntity {
-  @ManyToOne(() => TrainingEntity)
-  @JoinColumn([
-    { name: 'training_id', referencedColumnName: 'traning_id' },
-    { name: 'history_id', referencedColumnName: 'history_id' },
-  ])
-  training: TrainingEntity;
+  @PrimaryColumn()
+  customer_id: number;
 
-  @Column({ type: 'text', length: 300, nullable: true })
+  @PrimaryColumn()
+  trainer_id: number;
+
+  @ManyToOne(() => HistoryEntity)
+  @JoinColumn([
+    { name: 'trainer_id', referencedColumnName: 'trainer_id' },
+    { name: 'customer_id', referencedColumnName: 'customer_id' },
+  ])
+  history: HistoryEntity;
+
+  @Column({ type: 'text', nullable: true })
   contents?: string;
 }
