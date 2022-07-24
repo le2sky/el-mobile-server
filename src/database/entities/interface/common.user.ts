@@ -39,9 +39,9 @@ export abstract class CommonUserEntity extends DateAuditEntity {
   gender?: 'm' | 'f';
 
   @OneToMany(() => TrainingEntity, (traning) => traning.customer)
-  trainings: TrainingEntity[];
+  trainings?: TrainingEntity[];
 
   @OneToOne(() => MediaEntity)
   @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
-  profile_image: string;
+  profile_image?: string;
 }

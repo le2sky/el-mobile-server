@@ -33,5 +33,5 @@ export class HistoryEntity extends DateAuditEntity {
 
   @OneToOne(() => MediaEntity)
   @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
-  profile_image: string;
+  profile_image?: string;
 }
