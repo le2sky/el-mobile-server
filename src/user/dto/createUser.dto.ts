@@ -1,13 +1,9 @@
 import { PickType } from '@nestjs/swagger';
-import { UsersEntity } from 'src/database/entities/user.entity';
+import { CustomerEntity } from 'src/database/entities/customer.entity';
 
-export class CreateUserDto extends PickType(UsersEntity, [
-  `email`,
-  `nickName`,
+export class CreateUserDto extends PickType(CustomerEntity, [
   `password`,
-  `user_id`,
-  `agree_marketing`,
-  `agree_info`,
-  `push_notification`,
-  'gender',
+  `id`,
+  `name`,
+  `phone_number`,
 ] as const) {}

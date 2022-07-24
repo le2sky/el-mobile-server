@@ -1,6 +1,4 @@
 import { PickType } from '@nestjs/swagger';
-import { VideoEntity } from 'src/database/entities/video.entity';
+import { MediaEntity } from 'src/database/entities/media.entity';
 
-export class CreateVideoDto extends PickType(VideoEntity, [
-  's3_address',
-] as const) {}
+export class CreateVideoDto extends PickType(MediaEntity, ['path'] as const) {}

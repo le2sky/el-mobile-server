@@ -1,4 +1,6 @@
 export type Payload = {
-  email: string;
-  sub: string;
+  iss: string;
+  aud: string;
+  sub: number;
+  name: string;
 };
