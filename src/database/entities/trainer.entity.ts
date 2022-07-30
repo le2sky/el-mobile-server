@@ -6,6 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CommunityEntity } from './community.entity';
 import { CommonUserEntity } from './interface/commonUser.entity';
 import { MediaEntity } from './media.entity';
 import { TrainingEntity } from './training.entity';
@@ -21,16 +22,16 @@ export class TrainerEntity extends CommonUserEntity {
   @Column({ type: 'text', nullable: true })
   award?: string;
 
-  @Column({ type: 'datetime', nullable: true })
-  training_day?: string;
-
   @Column({ type: 'text', nullable: true })
   self_introduction?: string;
 
-  @OneToMany(() => TrainingEntity, (traning) => traning.customer)
+  @OneToMany(() => TrainingEntity, (traning) => traning.trainer)
   trainings?: TrainingEntity[];
 
-  @OneToOne(() => MediaEntity)
+  @OneToMany(() => CommunityEntity, (post) => post.trainer)
+  posts?: CommunityEntity[];
+
+  @OneToOne(() => MediaEntity, { nullable: true })
   @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
-  profile_image?: string;
+  profile_image?: number;
 }

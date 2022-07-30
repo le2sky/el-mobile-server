@@ -42,7 +42,7 @@ export class HistoryEntity extends DateAuditEntity {
   ])
   training: TrainingEntity;
 
-  @OneToOne(() => MediaEntity)
-  @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
-  profile_image?: string;
+  @OneToOne(() => MediaEntity, { nullable: true })
+  @JoinColumn({ name: 'media', referencedColumnName: 'media_id' })
+  media?: number;
 }

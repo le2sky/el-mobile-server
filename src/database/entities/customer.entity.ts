@@ -7,6 +7,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CommunityEntity } from './community.entity';
 import { CommonUserEntity } from './interface/commonUser.entity';
 import { MediaEntity } from './media.entity';
 import { TrainingEntity } from './training.entity';
@@ -27,7 +28,10 @@ export class CustomerEntity extends CommonUserEntity {
   @OneToMany(() => TrainingEntity, (traning) => traning.customer)
   trainings?: TrainingEntity[];
 
-  @OneToOne(() => MediaEntity)
+  @OneToMany(() => CommunityEntity, (post) => post.customer)
+  posts?: CommunityEntity[];
+
+  @OneToOne(() => MediaEntity, { nullable: true })
   @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
-  profile_image?: string;
+  profile_image?: number;
 }
