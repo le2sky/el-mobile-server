@@ -22,7 +22,7 @@ export class CommunityEntity {
   @Column({ type: 'text', nullable: true })
   content?: string;
 
-  @Column({ type: 'int4', nullable: true })
+  @Column({ type: 'integer', nullable: true })
   like_count?: number;
 
   @CreateDateColumn()
