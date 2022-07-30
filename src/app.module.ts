@@ -8,11 +8,11 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DB_HOST || 'root',
       port: 3306,
       username: 'root',
-      password: 'root',
-      database: 'el',
+      password: process.env.DB_ROOT_PW || 'root',
+      database: process.env.DB_NAME || 'el-db-mysql',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),

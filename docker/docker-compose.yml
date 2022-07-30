@@ -5,7 +5,7 @@ services:
     container_name: el-db
     restart: always
     environment:
-      MYSQL_DATABASE: ${DB_HOST}
+      MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
     volumes:
       - .dbdata:/var/lib/mysql
