@@ -5,9 +5,23 @@ services:
     container_name: el-db
     restart: always
     environment:
-      MYSQL_DATABASE: el
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DB_HOST}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
       - '3306:3306'
+    networks:
+      - el
+
+  back:
+    image: le2sky/el-backend:latest
+    depends_on:
+      - db
+    networks:
+      - el
+    env_file:
+      - .env
+
+networks:
+  el:
