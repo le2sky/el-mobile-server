@@ -10,11 +10,12 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async jwtLogIn(data: LoginRequestDto) {
-    const { id, password } = data;
+  async jwtLogIn(dto: LoginRequestDto) {
+    const { id, password } = dto;
 
-    //* 이메일 체크
-    const user = await this.userService.findOneBy({ id });
+    //* 아이디 체크
+    const user = await this.userService.getOneWithUserId(id);
+
     if (!user) {
       throw new UnauthorizedException('아이디와 비밀번호를 확인해주세요.');
     }
