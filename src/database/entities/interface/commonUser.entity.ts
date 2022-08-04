@@ -25,7 +25,7 @@ export abstract class CommonUserEntity extends DateAuditEntity {
   @Transform(({ value }) => value.trim())
   @IsNotEmpty()
   @IsString()
-  @Column({ type: 'varchar', length: 50, nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 
   @IsBoolean()
