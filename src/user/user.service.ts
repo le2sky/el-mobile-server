@@ -13,16 +13,12 @@ export class UserService {
     private customerRepository: Repository<CustomerEntity>,
   ) {}
 
-  async findOneBy(
-    where:
-      | FindOptionsWhere<CustomerEntity>
-      | FindOptionsWhere<CustomerEntity>[],
-  ) {
-    return this.customerRepository.findOneBy(where);
+  async getOneWithId(userId: number) {
+    return await this.customerRepository.findOneBy({ customer_id: userId });
   }
 
-  async getOne(userId: number) {
-    return await this.customerRepository.findOneBy({ customer_id: userId });
+  async getOneWithUserId(id: string) {
+    return await this.customerRepository.findOneBy({ id });
   }
 
   async signUp(dto: CreateUserDto) {
