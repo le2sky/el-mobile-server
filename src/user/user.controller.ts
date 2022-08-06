@@ -10,12 +10,12 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { AuthService } from 'src/auth/auth.service';
-import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
-import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
-import { User } from 'src/common/decorators/user.decorator';
-import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
-import { CustomerEntity } from 'src/database/entities/customer.entity';
+import { AuthService } from '../auth/auth.service';
+import { LoginRequestDto } from '../auth/dto/login.request.dto';
+import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
+import { User } from '../common/decorators/user.decorator';
+import { SuccessInterceptor } from '../common/interceptors/success.interceptor';
+import { CustomerEntity } from '../database/entities/customer.entity';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserService } from './user.service';

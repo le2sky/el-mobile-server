@@ -1,5 +1,5 @@
 import { Body, Controller, UseInterceptors } from '@nestjs/common';
-import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+import { SuccessInterceptor } from '../common/interceptors/success.interceptor';
 import { CreateVideoDto } from './dto/createVideo.dto';
 import { VideoService } from './video.service';
 

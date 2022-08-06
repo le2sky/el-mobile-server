@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DataSource } from 'typeorm';
 
-import { AppModule } from 'src/app.module';
+import { AppModule } from '../../../src/app.module';
 import { TrainerEntity } from '../entities/trainer.entity';
 import { ConfigService } from '@nestjs/config';
 
