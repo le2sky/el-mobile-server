@@ -17,8 +17,14 @@ import { TrainingService } from './training.service';
 export class TrainingController {
   constructor(private trainingService: TrainingService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async getAll() {
+  async myTraining(@User() user: CustomerEntity) {
+    return await this.trainingService.getMyTraining(user.customer_id);
+  }
+
+  @Get('/trainers')
+  async allTrainer() {
     return await this.trainingService.getAllTrainer();
   }
 

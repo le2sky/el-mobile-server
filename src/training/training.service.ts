@@ -23,6 +23,10 @@ export class TrainingService {
     return await this.trainerRepository.find();
   }
 
+  async getMyTraining(customerId: number) {
+    return await this.trainingRepository.findBy({ customer_id: customerId });
+  }
+
   async join(customerId: number, trainerId: number) {
     const trainer = await this.trainerRepository.findOneBy({
       trainer_id: trainerId,
