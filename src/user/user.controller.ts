@@ -20,7 +20,7 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller('users')
 @UseInterceptors(SuccessInterceptor)
 export class UserController {
   constructor(
