@@ -11,7 +11,9 @@ import { User } from '../common/decorators/user.decorator';
 import { CustomerEntity } from '../database/entities/customer.entity';
 import { SuccessInterceptor } from '../common/interceptors/success.interceptor';
 import { TrainingService } from './training.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('트레이닝(Macthing)')
 @Controller('training')
 @UseInterceptors(SuccessInterceptor)
 export class TrainingController {

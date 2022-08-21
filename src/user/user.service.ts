@@ -29,7 +29,7 @@ export class UserService {
   }
 
   async update(userId: number, dto: UpdateUserDto) {
-    return await this.customerRepository.update(1, dto);
+    return await this.customerRepository.update(userId, dto);
   }
 
   async delete(userId: number) {
