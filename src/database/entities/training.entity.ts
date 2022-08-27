@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty } from 'class-validator';
+import { IsDate, IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { CustomerEntity } from './customer.entity';
 import { TrainerEntity } from './trainer.entity';
@@ -11,15 +11,15 @@ export class TrainingEntity {
   @PrimaryColumn()
   trainer_id: number;
 
-  @IsDateString()
+  @IsDate()
   @IsNotEmpty()
   @Column({ type: 'datetime', nullable: false })
-  enrollAt: string;
+  enrollAt: Date;
 
-  @IsDateString()
+  @IsDate()
   @IsNotEmpty()
   @Column({ type: 'datetime', nullable: false })
-  expirationAt: string;
+  expirationAt: Date;
 
   @ManyToOne(() => CustomerEntity, (customer) => customer.trainings)
   @JoinColumn({ name: 'customer_id', referencedColumnName: 'customer_id' })

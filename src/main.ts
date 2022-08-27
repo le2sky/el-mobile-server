@@ -48,7 +48,8 @@ class Application {
           .setTitle('el backend openAPI')
           .setDescription('EL 서버 API 문서')
           .setVersion('1.0')
-          .addTag('el-backendt')
+          .addTag('el-backend')
+          .addBearerAuth()
           .build(),
       ),
     );
@@ -58,9 +59,9 @@ class Application {
       origin: this.corsOriginList,
       credentials: true,
     });
+    this.setUpGlobalPrefix();
     this.setUpOpenApiAuth();
     this.setUpOpenAPImidleware();
-    this.setUpGlobalPrefix();
     this.server.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,

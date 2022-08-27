@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber } from 'class-validator';
 import {
   Column,
@@ -17,10 +18,12 @@ export class CustomerEntity extends CommonUserEntity {
   @PrimaryGeneratedColumn()
   customer_id: number;
 
+  @ApiProperty()
   @IsNumber()
   @Column({ type: 'float', nullable: true })
   height?: number;
 
+  @ApiProperty()
   @IsNumber()
   @Column({ type: 'float', nullable: true })
   weight?: number;

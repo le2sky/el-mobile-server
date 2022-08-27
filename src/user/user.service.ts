@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerEntity } from 'src/database/entities/customer.entity';
+import { CustomerEntity } from '../database/entities/customer.entity';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
@@ -29,7 +29,7 @@ export class UserService {
   }
 
   async update(userId: number, dto: UpdateUserDto) {
-    return await this.customerRepository.update(1, dto);
+    return await this.customerRepository.update(userId, dto);
   }
 
   async delete(userId: number) {
