@@ -35,6 +35,18 @@ export class UserController {
     private authService: AuthService,
   ) {}
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: '로그인 사용자 정보 조회',
+    description:
+      '주어진 jwt 토큰을 사용해 현재 로그인 중인 유저의 정보를 얻습니다.',
+  })
+  async getUser(@User() user: CustomerEntity) {
+    return user;
+  }
+
   @Get('auth')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
