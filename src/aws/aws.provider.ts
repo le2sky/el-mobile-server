@@ -1,9 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as AWS from 'aws-sdk';
 import { PromiseResult } from 'aws-sdk/lib/request';
-import path from 'path';
+import * as path from 'path';
 import { MediaEntity } from '../database/entities/media.entity';
 import { Repository } from 'typeorm';
 @Injectable()
@@ -48,6 +48,7 @@ export class AwsProvider {
 
       return { key, s3Obj, contentType: file.mimetype };
     } catch (error) {
+      Logger.error(error);
       throw new BadRequestException('파일 업로드를 실패했습니다.');
     }
   }

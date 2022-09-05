@@ -15,6 +15,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
   ApiBody,
+  ApiConsumes,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -148,6 +149,7 @@ export class UserController {
 
   @Post('profileImage')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UseInterceptors(FileInterceptor('file'))
   @ApiResponse({
     status: 201,
@@ -157,6 +159,7 @@ export class UserController {
     summary: '회원 프로필 이미지 설정',
     description: '주어진 이미지를 통해 사용자의 프로필 이미지를 설정합니다.',
   })
+  @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
       type: 'object',
