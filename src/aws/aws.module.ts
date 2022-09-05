@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AwsConfiguration } from './aws.configuration';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MediaEntity } from '../database/entities/media.entity';
 import { AwsProvider } from './aws.provider';
 
 @Module({
-  providers: [AwsProvider, AwsConfiguration],
+  imports: [TypeOrmModule.forFeature([MediaEntity])],
+  providers: [AwsProvider],
   exports: [AwsProvider],
 })
 export class AwsModule {}

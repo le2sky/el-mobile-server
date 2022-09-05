@@ -5,12 +5,15 @@ import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import * as bcrypt from 'bcrypt';
+import { AwsProvider } from '../aws/aws.provider';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(CustomerEntity)
     private customerRepository: Repository<CustomerEntity>,
+
+    private awsProvider: AwsProvider,
   ) {}
 
   async getOneWithId(userId: number) {
@@ -34,5 +37,13 @@ export class UserService {
 
   async delete(userId: number) {
     return await this.customerRepository.delete(userId);
+  }
+
+  async setProfileImage(userId: number, file: Express.Multer.File) {
+    const s3Obj = await this.awsProvider.upload('user_profile', file);
+    const media = await this.awsProvider.createMedia(s3Obj.key, 'image');
+    return await this.customerRepository.update(userId, {
+      profile_image: media.media_id,
+    });
   }
 }

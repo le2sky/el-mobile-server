@@ -7,11 +7,14 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
+  ApiBody,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -141,5 +144,34 @@ export class UserController {
   })
   async delete(@User() user: CustomerEntity) {
     return await this.userService.delete(user.customer_id);
+  }
+
+  @Post('profileImage')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiResponse({
+    status: 201,
+    description: '레코드가 성공적으로 생성 됐습니다.',
+  })
+  @ApiOperation({
+    summary: '회원 프로필 이미지 설정',
+    description: '주어진 이미지를 통해 사용자의 프로필 이미지를 설정합니다.',
+  })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  async setProfileImage(
+    @UploadedFile() file: Express.Multer.File,
+    @User() user: CustomerEntity,
+  ) {
+    return await this.userService.setProfileImage(user.customer_id, file);
   }
 }
