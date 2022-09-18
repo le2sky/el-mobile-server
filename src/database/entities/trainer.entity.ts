@@ -33,5 +33,5 @@ export class TrainerEntity extends CommonUserEntity {
 
   @OneToOne(() => MediaEntity, { nullable: true })
   @JoinColumn({ name: 'profile_image', referencedColumnName: 'media_id' })
-  profile_image?: number;
+  profile_image?: MediaEntity;
 }

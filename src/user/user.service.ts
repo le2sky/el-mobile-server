@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomerEntity } from '../database/entities/customer.entity';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import * as bcrypt from 'bcrypt';
@@ -17,7 +17,11 @@ export class UserService {
   ) {}
 
   async getOneWithId(userId: number) {
-    return await this.customerRepository.findOneBy({ customer_id: userId });
+    return await this.customerRepository
+      .createQueryBuilder('customer')
+      .leftJoinAndSelect('customer.profile_image', 'media')
+      .where({ customer_id: userId })
+      .getOne();
   }
 
   async getOneWithUserId(id: string) {
@@ -51,7 +55,7 @@ export class UserService {
     const s3Obj = await this.awsProvider.upload('user_profile', file);
     const media = await this.awsProvider.createMedia(s3Obj.key, 'image');
     return await this.customerRepository.update(userId, {
-      profile_image: media.media_id,
+      profile_image: media,
     });
   }
 }

@@ -35,7 +35,7 @@ async function saveMedia(
 
   const seeds = [];
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i < 10; i++) {
     const media = await saveMedia(mediaRepository);
     const trainer = trainerRepository.create({
       id: `test${i}`,
@@ -45,7 +45,7 @@ async function saveMedia(
       award: '수상 없음',
       career: '경력 없음',
       self_introduction: `잘부탁드립니다. 테스트 트레이너 ${i}번 입니다.`,
-      profile_image: media.media_id,
+      profile_image: media,
     });
     seeds.push(trainer);
   }
