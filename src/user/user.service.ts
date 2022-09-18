@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomerEntity } from '../database/entities/customer.entity';
 import { FindOptionsWhere, Repository } from 'typeorm';
@@ -25,6 +25,14 @@ export class UserService {
   }
 
   async signUp(dto: CreateUserDto) {
+    const { id } = dto;
+    const exsit = await this.customerRepository.findBy({ id });
+    if (exsit) {
+      throw new BadRequestException(
+        '해당 아이디로 만들어진 아이디가 이미 있습니다.',
+      );
+    }
+
     return await this.customerRepository.save({
       ...dto,
       password: await bcrypt.hash(dto.password, 10),
