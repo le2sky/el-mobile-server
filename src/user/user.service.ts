@@ -26,7 +26,7 @@ export class UserService {
 
   async signUp(dto: CreateUserDto) {
     const { id } = dto;
-    const exsit = await this.customerRepository.findBy({ id });
+    const exsit = await this.customerRepository.findOneBy({ id });
     if (exsit) {
       throw new BadRequestException(
         '해당 아이디로 만들어진 아이디가 이미 있습니다.',
