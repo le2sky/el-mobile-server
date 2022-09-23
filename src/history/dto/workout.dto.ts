@@ -6,7 +6,7 @@ import {
   Min,
 } from 'class-validator';
 
-export class CreateWorkoutDto {
+export class WorkoutDto {
   @IsString({ each: true })
   @IsNotEmpty()
   parts: string[];
