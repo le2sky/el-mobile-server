@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class DietDto {
   @IsString()
@@ -16,4 +16,10 @@ export class DietDto {
   @IsNumber()
   @IsNotEmpty()
   score: number;
+
+  image?: string;
+
+  getDescripion() {
+    return `${this.title}/${this.amount}/${this.score}`;
+  }
 }

@@ -1,6 +1,7 @@
 import {
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   Min,
@@ -22,4 +23,6 @@ export class WorkoutDto {
   @IsString()
   @IsNotEmpty()
   degree: string;
+
+  image?: string;
 }
