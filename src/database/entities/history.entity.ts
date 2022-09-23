@@ -44,5 +44,5 @@ export class HistoryEntity extends DateAuditEntity {
 
   @OneToOne(() => MediaEntity, { nullable: true })
   @JoinColumn({ name: 'media', referencedColumnName: 'media_id' })
-  media?: number;
+  media?: MediaEntity;
 }

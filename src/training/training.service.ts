@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TrainerEntity } from '../database/entities/trainer.entity';
 import { Repository } from 'typeorm';
 import { TrainingEntity } from '../database/entities/training.entity';
+import { TrainerInfoResponseDto } from './dto/trainerInfoResponse.dto';
 
 @Injectable()
 export class TrainingService {
@@ -20,7 +21,21 @@ export class TrainingService {
   ) {}
 
   async getAllTrainer() {
-    return await this.trainerRepository.find();
+    const trainers = await this.trainerRepository
+      .createQueryBuilder('trainer')
+      .leftJoinAndSelect('trainer.profile_image', 'media')
+      .getMany();
+
+    return trainers.map((trainer) => {
+      const dto = new TrainerInfoResponseDto();
+      dto.name = trainer.name;
+      dto.phone_number = trainer.phone_number;
+      dto.career = trainer.career;
+      dto.award = trainer.award;
+      dto.self_introduction = trainer.self_introduction;
+      dto.profile_image = trainer.profile_image.path;
+      return dto;
+    });
   }
 
   async getMyTraining(customerId: number) {

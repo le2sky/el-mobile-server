@@ -23,5 +23,5 @@ export class WorkoutEntity {
 
   @OneToOne(() => MediaEntity, { nullable: true })
   @JoinColumn({ name: 'guide_video', referencedColumnName: 'media_id' })
-  guide_video?: number;
+  guide_video?: MediaEntity;
 }
