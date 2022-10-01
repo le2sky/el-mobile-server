@@ -28,6 +28,7 @@ export class TrainingService {
 
     return trainers.map((trainer) => {
       const dto = new TrainerInfoResponseDto();
+      dto.trainer_id = trainer.trainer_id;
       dto.name = trainer.name;
       dto.phone_number = trainer.phone_number;
       dto.career = trainer.career;
