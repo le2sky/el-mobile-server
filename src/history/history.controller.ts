@@ -43,11 +43,17 @@ export class HistoryController {
   @UseInterceptors(FileInterceptor('file'))
   @Post('/diet/:training_id')
   async diet(
+    @Body() dto: DietDto,
     @Param('training_id') training_id: number,
     @UploadedFile() file: Express.Multer.File,
     @User() user,
   ) {
-    return await this.historyService.createDiet(training_id, user.id, file);
+    return await this.historyService.createDiet(
+      training_id,
+      user.id,
+      file,
+      dto,
+    );
   }
 
   @UseGuards(JwtAuthGuard)

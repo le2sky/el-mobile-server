@@ -28,13 +28,13 @@ export class HistoryEntity extends DateAuditEntity {
   @IsString()
   @IsNotEmpty()
   @Column({ type: 'varchar', length: 6, nullable: false })
-  history_type: string;
+  history_type: 'diet' | 'workout';
 
   @IsString()
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: false })
   description?: string;
 
-  @IsDateString()
+  @IsString()
   @IsNotEmpty()
   @Column({ type: 'datetime', nullable: false })
   perform_time: string;
