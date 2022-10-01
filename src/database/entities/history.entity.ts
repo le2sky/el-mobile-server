@@ -6,6 +6,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { DateAuditEntity } from './interface/dateAudit.entity';
 import { MediaEntity } from './media.entity';
@@ -14,6 +15,9 @@ import { TrainingEntity } from './training.entity';
 export const HISOTRY_TYPES = ['workout', 'diet'];
 @Entity('history')
 export class HistoryEntity extends DateAuditEntity {
+  @PrimaryGeneratedColumn()
+  history_id: number;
+
   @PrimaryColumn()
   customer_id: number;
 
