@@ -8,8 +8,9 @@ import {
   IsString,
   Length,
 } from 'class-validator';
+import { IHistory } from './Ihistory';
 
-export class DietDto {
+export class DietDto implements IHistory {
   @ApiProperty({ type: 'string', required: true })
   @IsString()
   @IsNotEmpty()
@@ -26,14 +27,14 @@ export class DietDto {
   @IsNotEmpty()
   amount: string;
 
-  @ApiProperty({ type: 'number', format: 'number', required: true })
+  @ApiProperty({ type: 'number', required: true })
   @IsNumber()
   @Type(() => Number)
   @IsNotEmpty()
   score: number;
 
   @ApiProperty({ type: 'string', format: 'binary', required: true })
-  file: Express.Multer.File;
+  file?: Express.Multer.File;
 
   path?: string;
 

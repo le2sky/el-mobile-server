@@ -33,7 +33,7 @@ export class HistoryEntity extends DateAuditEntity {
   @IsIn(HISOTRY_TYPES)
   @IsString()
   @IsNotEmpty()
-  @Column({ type: 'varchar', length: 6, nullable: false })
+  @Column({ type: 'varchar', length: 7, nullable: false })
   history_type: 'diet' | 'workout';
 
   @IsString()

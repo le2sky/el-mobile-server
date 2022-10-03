@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -51,6 +52,31 @@ export class HistoryController {
       trainer_id,
       user.customer_id,
       date,
+      'diet',
+    );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: '운동영상 및 피드백 조회',
+    description: '',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '레코드가 성공적으로 조회 됐습니다.',
+  })
+  @Get('/workout/:trainer_id/:YYYYMMDD')
+  async getWorktout(
+    @Param('trainer_id') trainer_id: number,
+    @Param('YYYYMMDD') date: string,
+    @User() user: CustomerEntity,
+  ) {
+    return await this.historyService.getContents(
+      trainer_id,
+      user.customer_id,
+      date,
+      'workout',
     );
   }
 
@@ -87,16 +113,24 @@ export class HistoryController {
     summary: '영상 업로드',
     description: '',
   })
+  @ApiConsumes('multipart/form-data')
   @ApiResponse({
     status: 201,
     description: '레코드가 성공적으로 생성 됐습니다.',
   })
-  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
   @Post('/workout/:trainer_id')
   async workout(
+    @Body() dto: WorkoutDto,
     @Param('trainer_id') trainer_id: number,
     @UploadedFile() file: Express.Multer.File,
     @User() user,
-  ) {}
+  ) {
+    return await this.historyService.createWorkout(
+      trainer_id,
+      user.customer_id,
+      file,
+      dto,
+    );
+  }
 }
