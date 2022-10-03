@@ -1,4 +1,10 @@
-import { IsDateString, IsIn, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDate,
+  IsDateString,
+  IsIn,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 import {
   Column,
   Entity,
@@ -34,10 +40,10 @@ export class HistoryEntity extends DateAuditEntity {
   @Column({ type: 'text', nullable: false })
   description?: string;
 
-  @IsString()
+  @IsDate()
   @IsNotEmpty()
   @Column({ type: 'datetime', nullable: false })
-  perform_time: string;
+  perform_time: Date;
 
   @ManyToOne(() => TrainingEntity)
   @JoinColumn([

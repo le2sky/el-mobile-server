@@ -4,9 +4,13 @@ import { HistoryEntity } from '../database/entities/history.entity';
 import { AwsModule } from '../aws/aws.module';
 import { HistoryController } from './history.controller';
 import { HistoryService } from './history.service';
+import { TrainerEntity } from '../database/entities/trainer.entity';
 
 @Module({
-  imports: [AwsModule, TypeOrmModule.forFeature([HistoryEntity])],
+  imports: [
+    AwsModule,
+    TypeOrmModule.forFeature([HistoryEntity, TrainerEntity]),
+  ],
   controllers: [HistoryController],
   providers: [HistoryService],
 })
